@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,32 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+
+#include "CoreMinimal.h"
+#include "ObjectMacros.h"
+#include "PlanetRotation.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FPlanetRotation
+{
+	GENERATED_BODY()
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Period;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float AxialTilt;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Inclination;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float AscendingNode;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float MeridianAngle;
+};
+
+

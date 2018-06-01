@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,47 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+
+#include "CoreMinimal.h"
+#include "ObjectMacros.h"
+#include "Orbit.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FOrbit
+{
+	GENERATED_BODY()
+	FOrbit()
+	{
+		SemiMajorAxis = 0.0;
+	}
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Epoch;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float MeanAnomaliy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float SemiMajorAxis;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Eccentricity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float ArgofPreiCenter;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float AscendingNode;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Period;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Inclination;
+};
+
+

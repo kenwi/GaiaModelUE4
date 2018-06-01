@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+
+#include "CoreMinimal.h"
+#include "ObjectMacros.h"
+#include "Orbit.h"
+#include "Asteroid.generated.h"
+
+USTRUCT(BlueprintType)
+struct FAsteroid
+{
+	GENERATED_BODY()
+
+	FAsteroid()
+	{
+		Name = "None";
+		Color = { 0.0, 0.0, 0.0, 0.0 };
+	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<float> Color;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FOrbit Orbit;
+};
+
+

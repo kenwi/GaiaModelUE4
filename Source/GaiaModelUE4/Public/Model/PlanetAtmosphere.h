@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+
+#include "AtmosphereParameters.h"
+#include "CoreMinimal.h"
+#include "ObjectMacros.h"
+#include "PlanetAtmosphere.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FPlanetAtmosphere
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Size;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<float> Wavelengths;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float M_Kr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float M_Km;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool CorrectGround;
+
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Amosphere Parameters"))
+		FAtmosphereParameters Params;
+};
+
+

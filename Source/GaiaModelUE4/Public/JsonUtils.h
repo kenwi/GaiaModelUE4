@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+
+#pragma once
+
+#include "CoreMinimal.h"
+
+static struct FJsonUtils
+{
+	template<typename T>
+	FORCEINLINE static void Deserialize(const FString JsonString, TArray<T>& Objects)
+	{
+		const TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(JsonString);
+		TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
+		if (FJsonSerializer::Deserialize(JsonReader, JsonObject))
+		{
+			const TArray<TSharedPtr<FJsonValue>> ObjectArray = JsonObject->GetArrayField(TEXT("objects"));
+			check(FJsonObjectConverter::JsonArrayToUStruct<T>(ObjectArray, &Objects, 0, 0));
+		}
+	}
+};
+
+

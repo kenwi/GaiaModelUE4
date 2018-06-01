@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2018 Kenneth Wilhelmsen
@@ -19,3 +20,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+
+#include "CoreMinimal.h"
+#include "ObjectMacros.h"
+#include "AtmosphereParameters.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FAtmosphereParameters
+{
+	GENERATED_BODY()
+		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Quality;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString Diameter;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Flip;
+};
+
+
