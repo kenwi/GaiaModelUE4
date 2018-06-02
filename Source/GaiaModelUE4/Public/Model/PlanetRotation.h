@@ -27,12 +27,11 @@ SOFTWARE.
 #include "ObjectMacros.h"
 #include "PlanetRotation.generated.h"
 
-
 USTRUCT(BlueprintType)
 struct FPlanetRotation
 {
 	GENERATED_BODY()
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Period;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

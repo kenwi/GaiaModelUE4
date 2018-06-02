@@ -40,11 +40,6 @@ struct FPlanet
 		Size = 1.0;
 		AbsMag = 1.0;
 		AppMag = 1.0;
-		Rotation.AscendingNode = 1.0;
-		Rotation.AxialTilt = 1.0;
-		Rotation.Inclination = 1.0;
-		Rotation.MeridianAngle = 1.0;
-		Rotation.Period = 1.0;
 	}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Parameters")

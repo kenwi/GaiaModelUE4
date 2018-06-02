@@ -28,12 +28,19 @@ SOFTWARE.
 #include "ObjectMacros.h"
 #include "PlanetAtmosphere.generated.h"
 
-
 USTRUCT(BlueprintType)
 struct FPlanetAtmosphere
 {
 	GENERATED_BODY()
-	
+	FPlanetAtmosphere()
+	{
+		Size = 0.0;
+		Wavelengths = { 0.0 };
+		M_Kr = 0.0;
+		M_Km = 0.0;
+		CorrectGround = true;
+	}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Size;
 

@@ -27,17 +27,21 @@ SOFTWARE.
 #include "ObjectMacros.h"
 #include "AtmosphereParameters.generated.h"
 
-
 USTRUCT(BlueprintType)
 struct FAtmosphereParameters
 {
 	GENERATED_BODY()
-		
+	FAtmosphereParameters() 
+	{
+		Quality = 0.0;
+		Diameter = 0.0;
+		Flip = false;
+	}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Quality;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FString Diameter;
+		float Diameter;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Flip;

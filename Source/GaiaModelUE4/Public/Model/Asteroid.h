@@ -32,7 +32,6 @@ USTRUCT(BlueprintType)
 struct FAsteroid
 {
 	GENERATED_BODY()
-
 	FAsteroid()
 	{
 		Name = "None";

@@ -27,16 +27,21 @@ SOFTWARE.
 #include "ObjectMacros.h"
 #include "Orbit.generated.h"
 
-
 USTRUCT(BlueprintType)
 struct FOrbit
 {
 	GENERATED_BODY()
 	FOrbit()
 	{
+		Epoch = 0.0;
+		MeanAnomaliy = 0.0;
 		SemiMajorAxis = 0.0;
+		Eccentricity = 0.0;
+		ArgofPreiCenter = 0.0;
+		AscendingNode = 0.0;
+		Period = 0.0;
+		Inclination = 0.0;
 	}
-
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Epoch;
