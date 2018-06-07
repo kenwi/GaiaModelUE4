@@ -27,21 +27,48 @@ SOFTWARE.
 #include "Curves/CurveFloat.h"
 #include "GalaxySurfaceBrightnessCurve.generated.h"
 
-UCLASS()
+UCLASS(BlueprintType)
 class  UGalaxySurfaceBrightnessCurve : public UCurveFloat
 {
 	GENERATED_BODY()
+	
+	UGalaxySurfaceBrightnessCurve() 
+		: UCurveFloat()
+		, Max(10e4)
+		, Min(0)
+		, BulgeRadius(1000)
+		, Steps(1000)
+	{
+
+	}
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Max = 10000;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Min = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float BulgeRadius = 1000;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int Steps = 100;
+
+public:
+	/** Build up a number of points for the curve, then interpolate between them */
+	UFUNCTION(BlueprintCallable, Category = "Math|Curves")
+		void Build();
 
 	/** Evaluate this float curve at the specified radius */
 	UFUNCTION(BlueprintCallable, Category = "Math|Curves")
-		float GetSurfaceBrightness(float R) const;
+		float GetSurfaceBrightness(float R) ;
 
 	/** Vaucouleurs-law: I(R) = I0 * e^(-k * R^(1/4)) */
 	UFUNCTION(BlueprintCallable, Category = "Math|Curves")
 		float GetCentralIntensity(float R, float I0, float k) const;
 
-	/** Freeman: I(R) = I0 * e ^ (-R / a)
-				   RD = Intensity drop 50 % */
+	/** Freeman: I(R) = I0 * e ^ (-R / a), a = Intensity drop 50 % */
 	UFUNCTION(BlueprintCallable, Category = "Math|Curves")
 		float GetOuterIntensity(float R, float I0, float a) const;
 };

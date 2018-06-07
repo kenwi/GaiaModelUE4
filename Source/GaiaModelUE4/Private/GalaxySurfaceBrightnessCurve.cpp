@@ -23,21 +23,26 @@ SOFTWARE.
 */
 #include "GalaxySurfaceBrightnessCurve.h"
 
-float UGalaxySurfaceBrightnessCurve::GetSurfaceBrightness(float R) const
+void UGalaxySurfaceBrightnessCurve::Build()
 {
-	float I0, k, a = 0;
-	float BulgeRadius = 100;
-	
-	if (R < BulgeRadius) {
-		I0 = GetCentralIntensity(R, I0, k);
-	}
-	else
-	{
-		I0 = GetCentralIntensity(BulgeRadius, I0, k);
-		I0 = GetOuterIntensity(R - BulgeRadius, I0, a);
-	}
+	const float h = (Max - Min) / Steps;
 
-	return I0;//return R < BulgeRadius ? GetCentralIntensity(R, I0, k) : GetOuterIntensity(R - BulgeRadius, GetCentralIntensity(BulgeRadius, I0, k), a);
+	FloatCurve.Reset();
+	for (int i = 0; i < Steps; i++)
+	{
+		const float R = i * h;
+		const float Intensity = GetSurfaceBrightness(R);
+		FloatCurve.AddKey(R, Intensity);
+	}
+}
+
+float UGalaxySurfaceBrightnessCurve::GetSurfaceBrightness(float R) 
+{
+	float I0 = 1.0;
+	float k = 0.02;
+	float a = Max / 3;
+	
+	return R < BulgeRadius ? GetCentralIntensity(R, I0, k) : GetOuterIntensity(R - BulgeRadius, GetCentralIntensity(BulgeRadius, I0, k), a);
 }
 
 float UGalaxySurfaceBrightnessCurve::GetCentralIntensity(float R, float I0, float k) const
@@ -45,7 +50,7 @@ float UGalaxySurfaceBrightnessCurve::GetCentralIntensity(float R, float I0, floa
 	return I0 * FMath::Exp(-k * FMath::Pow(R, 0.25));
 }
 
-float UGalaxySurfaceBrightnessCurve::GetOuterIntensity(float R, float I0, float a) const
+float UGalaxySurfaceBrightnessCurve::GetOuterIntensity(float R, float I0, float a) const 
 {
 	return I0 * FMath::Exp(-R / a);
 }
