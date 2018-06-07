@@ -29,6 +29,8 @@ SOFTWARE.
 #include "GameFramework/Actor.h"
 #include "JsonData.h"
 #include "Model/Planet.h"
+#include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 #include "ScriptMacros.h"
 #include "SolarSystem.generated.h"
 
@@ -39,17 +41,58 @@ class ASolarSystem : public AActor
 	GENERATED_BODY()
 
 public:
-	ASolarSystem() :
-		MaxWorldRadius(10000) 
+	ASolarSystem() 
+		: MaxWorldRadiusMeters(10000)
+		, UnitsPrMeter(100)
+		, SunRadius(695508000)
+		, SunMass(1.989e30)
+		, ScaleMultiplier(1.0)
 	{
+		PrimaryActorTick.bCanEverTick = true;
 
+		MaxWorldRadiusUnits = UnitsPrMeter * MaxWorldRadiusMeters;
+		SunRadiusScaled = SunRadius / ScaleMultiplier;
+		SunMassScaled = SunMass / ScaleMultiplier;
+
+		auto Sun = CreateDefaultSubobject<USphereComponent>(FName("Sphere"));
+		Sun->InitSphereRadius(SunRadiusScaled);
+		Sun->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Sun->SetCollisionResponseToAllChannels(ECR_Ignore);
+		RootComponent = Sun;
 	}
+
+	UFUNCTION(BlueprintCallable)
+		void UpdateForces(float DeltaTime);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		TArray<FPlanet> Planets;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float MaxWorldRadius;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float SunRadius;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float ScaleMultiplier;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float SunMass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float SunRadiusScaled;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		float SunMassScaled;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		FVector SunPosition;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scaling")
+		float MaxWorldRadiusMeters;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Scaling")
+		float MaxWorldRadiusUnits;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scaling")
+		float UnitsPrMeter;
 
 protected:
 	virtual void BeginPlay() override;

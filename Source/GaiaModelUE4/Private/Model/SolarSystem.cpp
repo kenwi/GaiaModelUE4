@@ -32,19 +32,25 @@ void ASolarSystem::BeginPlay()
 void ASolarSystem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UpdateForces(DeltaTime);
+}
+
+void ASolarSystem::UpdateForces(float DeltaTime)
+{
+	for (int i = 0; i < Planets.Num(); i++)
+	{
+		auto &Planet = Planets[i];
+		
+	}
 }
 
 void ASolarSystem::OnConstruction(const FTransform & Transform)
 {
-	Planets.Empty();
-
-	Data = NewObject<AJsonData>(this);	
-	int num = Data->Planets.Num();
-	check(num == 0);
-	Data->DoWork();
-	num = Data->Planets.Num();
-	check(num > 0);
-
-	Planets = Data->Planets;	
 	Super::OnConstruction(Transform);
+
+	Planets.Empty();
+	Data = NewObject<AJsonData>(this);	
+	Data->DoWork();
+	Planets = Data->Planets;
+
 }
