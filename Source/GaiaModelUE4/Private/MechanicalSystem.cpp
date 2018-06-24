@@ -34,7 +34,21 @@ void UMechanicalSystem::Initialize()
 {
 }
 
-FVector4 UMechanicalSystem::CalculateForces(const TArray<FVector4> Forces)
+FVector UMechanicalSystem::CalculateForces(const TArray<FVector> &InForces, float DeltaTime)
 {
-	return FVector4();
+	FVector NetForce = FVector(0);
+	uint32 Interations = 0;
+	
+	for (int i = 0; i < InForces.Num(); i++)
+	{
+		for (int j = i + 1; j < InForces.Num(); j++, Interations++)
+		{
+			// Calculate forces by square law
+			const FVector dXdY = InForces[i] - InForces[j];
+			const float R = FMath::Sqrt(FMath::Pow(dXdY.X, 2) + FMath::Pow(dXdY.Y, 2) + FMath::Pow(dXdY.Z, 2)) * DeltaTime;			
+			NetForce += FVector(R);
+		}
+	}	
+	
+	return NetForce;
 }

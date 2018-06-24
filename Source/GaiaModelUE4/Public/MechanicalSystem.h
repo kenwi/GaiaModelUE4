@@ -39,9 +39,10 @@ public:
 
 	void Initialize();
 
-	FVector4 CalculateForces(const TArray<FVector4> Forces);
-
+	FVector CalculateForces(const TArray<FVector> &InForces, float DeltaTime);
+	
 	TArray<FVector> Positions;
+	TArray<FVector> Forces;
 };
 
 

@@ -64,6 +64,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void UpdateForces(float DeltaTime);
 
+	void UpdatePositions(const TArray<FPlanet>& Planets, TArray<FVector> Positions, float DeltaTime);
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		TArray<FPlanet> Planets;
 

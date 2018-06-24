@@ -65,6 +65,9 @@ struct FPlanet
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Parameters")
 		FOrbit Orbit;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Physics")
+		TArray<FVector> Forces;
 };
 
 

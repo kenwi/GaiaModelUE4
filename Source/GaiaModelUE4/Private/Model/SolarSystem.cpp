@@ -40,7 +40,14 @@ void ASolarSystem::UpdateForces(float DeltaTime)
 	for (int i = 0; i < Planets.Num(); i++)
 	{
 		auto &Planet = Planets[i];
-		
+	}
+}
+
+void ASolarSystem::UpdatePositions(const TArray<FPlanet> &Planets, TArray<FVector> Positions, float DeltaTime)
+{
+	for (int i = 0; i < Planets.Num(); i++)
+	{
+		auto &Planet = Planets[i];
 	}
 }
 
@@ -48,9 +55,15 @@ void ASolarSystem::OnConstruction(const FTransform & Transform)
 {
 	Super::OnConstruction(Transform);
 
-	Planets.Empty();
+	if (Planets.Num() > 0) 
+	{
+		Planets.Empty();
+	}
+
 	Data = NewObject<AJsonData>(this);	
 	Data->DoWork();
 	Planets = Data->Planets;
 
+	TArray<FVector> Positions;
+	UpdatePositions(Planets, Positions, 0);
 }
