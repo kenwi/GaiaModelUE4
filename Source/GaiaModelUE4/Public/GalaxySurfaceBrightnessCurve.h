@@ -39,7 +39,7 @@ class  UGalaxySurfaceBrightnessCurve : public UCurveFloat
 		, BulgeRadius(1000)
 		, Steps(1000)
 	{
-
+		
 	}
 
 public:
